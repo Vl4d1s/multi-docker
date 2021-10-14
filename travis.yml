@@ -1,0 +1,25 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t vladismarkin/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true vladismarkin/react-test npm test
+
+after_success:
+  - docker build -t vladismarkin/multi-client ./client
+  - docker build -t vladismarkin/multi-nginx ./nginx
+  - docker build -t vladismarkin/multi-server ./server
+  - docker build -t vladismarkin/multi-worker ./worker
+
+  # Log in to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  - docker push vladismarkin/multi-client
+  - docker push vladismarkin/multi-nginx
+  - docker push vladismarkin/multi-server
+  - docker push vladismarkin/multi-worker
