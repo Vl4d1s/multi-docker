@@ -17,7 +17,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <h1>{this.state.message ? this.state.message : "no server running"}</h1>
+      <h1>
+        {this.state.message ? "the server is running" : "no server running"}
+      </h1>
     );
   }
 }
