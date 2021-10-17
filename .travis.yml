@@ -14,7 +14,6 @@ after_success:
   - docker build -t vladismarkin/multi-client ./client
   - docker build -t vladismarkin/multi-nginx ./nginx
   - docker build -t vladismarkin/multi-server ./server
-  - docker build -t vladismarkin/multi-worker ./worker
 
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
@@ -22,7 +21,6 @@ after_success:
   - docker push vladismarkin/multi-client
   - docker push vladismarkin/multi-nginx
   - docker push vladismarkin/multi-server
-  - docker push vladismarkin/multi-worker
 
 deploy:
   provider: elasticbeanstalk
