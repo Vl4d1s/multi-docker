@@ -8,7 +8,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-  res.send("Hi");
+  res.send("Hi from the server :)");
 });
 
 app.listen(5000, (err) => {
